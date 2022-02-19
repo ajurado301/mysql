@@ -1,0 +1,33 @@
+ /* Limpiadores */
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Elemento HTML */
+p {
+    margin: 0;
+}
+
+th, tr {
+    user-select: none;
+}
+
+/* Estilos propios */
+.fila-resultados:hover {
+    background-color: rgb(232, 246, 255);
+}
+
+/* Bootstrap modificados */
+.bg-success {
+    background-color: rgba(40, 225, 40, 0.5)!important;
+}
+
+.bg-warning {
+    background-color: rgba(245, 240, 75, 0.5)!important;
+}
+
+.bg-danger {
+    background-color: rgba(245, 80, 80, 0.5)!important;
+}
