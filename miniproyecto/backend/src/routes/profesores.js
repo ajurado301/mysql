@@ -5,7 +5,7 @@ const router = Router();
 // Importar controladores
 const { getProfesor, postProfesor, putProfesor, deleteProfesor } = require('../controllers/profesores')
 
-// Crear los endpoints para la ruta /alumnos y atenderlos mediante sus controladores
+// Crear los endpoints para la ruta /profesores y atenderlos mediante sus controladores
 router.get('/', getProfesor);
 router.post('/', postProfesor);
 router.put('/', putProfesor);

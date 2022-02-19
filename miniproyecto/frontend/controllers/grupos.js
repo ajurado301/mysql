@@ -1,14 +1,14 @@
 //*****************************************************
-// GET profesor
+// GET grupo
 //*****************************************************
-function getProfesor() {
-    let urlProfesores = urlBase + '/profesores';
-    let id = $('#id-profesor').val();    
+function getGrupo() {
+    let urlGrupos = urlBase + '/grupos';
+    let id = $('#id-grupo').val();    
     if (id.length > 0) {
-        urlProfesores += `?id=${id}`
+        urlGrupos += `?id=${id}`
     };
     let parametros = { headers: headers, method: 'GET' };
-    fetch(urlProfesores, parametros)
+    fetch(urlGrupos, parametros)
     .then((resultado) => {
         return resultado.json()
     })
@@ -16,9 +16,9 @@ function getProfesor() {
         if (respuesta.ok) {
             mostrarToast('ok', respuesta.message);
             if (respuesta.resultado.length > 0) {
-                mostrarListadoProfesores(respuesta.resultado)
+                mostrarListadoGrupos(respuesta.resultado)
             }else {
-                llenarFormProfesores(respuesta.resultado)
+                llenarFormGrupos(respuesta.resultado)
             }
         }else {
             mostrarToast('alert', respuesta.message)    
@@ -29,26 +29,26 @@ function getProfesor() {
     })
 }
 //*****************************************************
-// Fin GET profesor
+// Fin GET grupo
 //*****************************************************
 
 //*****************************************************
-// POST profesor
+// POST grupo
 //*****************************************************
-function postProfesor() {
-    let profesor = leerProfesoresForm();
-    let cuerpo = validarProfesoresForm(profesor);
+function postGrupo() {
+    let grupo = leerGruposForm();
+    let cuerpo = validarGruposForm(grupo);
     if (cuerpo == '') {
-        let urlProfesores = urlBase + `/profesores`;
-        let parametros = { headers: headers, body: JSON.stringify(profesor), method: 'POST' };
-        fetch(urlProfesores, parametros)
+        let urlGrupos = urlBase + `/grupos`;
+        let parametros = { headers: headers, body: JSON.stringify(grupo), method: 'POST' };
+        fetch(urlGrupos, parametros)
         .then((resultado) => {
             return resultado.json();
         })
         .then((respuesta) => {
             let tipo = (respuesta.ok) ? 'ok' : 'alert';
             mostrarToast(tipo, respuesta.message);
-            $('#profesores-form').trigger('reset');
+            $('#grupos-form').trigger('reset');
         })        
         .catch((error) => {
             mostrarToast('error', error.message)
@@ -58,25 +58,25 @@ function postProfesor() {
     }
 }
 //*****************************************************
-// Fin POST profesor
+// Fin POST grupo
 //*****************************************************
 
 //*****************************************************
-// PUT profesor
+// PUT grupo
 //*****************************************************
-function putProfesor() {
-    let id = $('#id-profesor').val().trim();
+function putGrupo() {
+    let id = $('#id-grupo').val().trim();
     if (id.length == 0){
-        let cuerpo = 'Es necesario el id del profesor';
+        let cuerpo = 'Es necesario el id del grupo';
         mostrarToast('alert', cuerpo);
     }else{
-        let profesor = leerProfesoresForm();            
-        let cuerpo = validarProfesoresForm(profesor);
+        let grupo = leerGruposForm();            
+        let cuerpo = validarGruposForm(grupo);
         if (cuerpo == '') {
-            profesor.id = id;
-            let urlProfesores = urlBase + `/profesores`;
-            let parametros = { headers: headers, body: JSON.stringify(profesor), method: 'PUT' };
-            fetch(urlProfesores, parametros)
+            grupo.id = id;
+            let urlGrupos = urlBase + `/grupos`;
+            let parametros = { headers: headers, body: JSON.stringify(grupo), method: 'PUT' };
+            fetch(urlGrupos, parametros)
             .then((resultado) => {
                 return resultado.json();
             })
@@ -84,7 +84,7 @@ function putProfesor() {
                 let tipo = 'alert';
                 if (respuesta.ok) { 
                     tipo = 'ok';
-                    $('#profesores-form').trigger('reset');
+                    $('#grupos-form').trigger('reset');
                     $('#tabla-resultados').html('');
                 };
                 mostrarToast(tipo, respuesta.message);
@@ -98,25 +98,25 @@ function putProfesor() {
     }    
 }
 //*****************************************************
-// Fin PUT profesor
+// Fin PUT grupo
 //*****************************************************
 
 //*****************************************************
-// DELETE profesor
+// DELETE grupo
 //*****************************************************
-function deleteProfesor() {
-    let id = $('#id-profesor').val().trim();
+function deleteGrupo() {
+    let id = $('#id-grupo').val().trim();
     if (id.length == 0) {
-        let cuerpo = 'Es necesario el id del profesor';
+        let cuerpo = 'Es necesario el id del grupo';
         mostrarToast('alert', cuerpo);
     }else {
-        let urlProfesores = urlBase + `/profesores`;
+        let urlGrupos = urlBase + `/grupos`;
         let parametros = {
             headers: headers,
             body: JSON.stringify({ id: id }),
             method: "DELETE"
         };
-        fetch(urlProfesores, parametros)
+        fetch(urlGrupos, parametros)
         .then((resultado) => {
             return resultado.json()
         })
@@ -124,7 +124,7 @@ function deleteProfesor() {
             let tipo = 'alert';
             if (respuesta.ok) { 
                 tipo = 'ok';
-                $('#profesores-form').trigger('reset');
+                $('#grupos-form').trigger('reset');
                 $('#tabla-resultados').html('');
             };            
             mostrarToast(tipo, respuesta.message);
@@ -135,31 +135,29 @@ function deleteProfesor() {
     }
 }
 //*****************************************************
-// Fin DELETE profesor
+// Fin DELETE grupos
 //*****************************************************
 
 //*****************************************************
-// Leer profesor del formulario y devolver json
+// Leer grupo del formulario y devolver json
 //*****************************************************
-function leerProfesoresForm() {
+function leerGruposForm() {
     let result = {
-        first_name: $('#nombre-profesor').val().trim(),
-        last_name: $('#apellidos-profesor').val().trim(),
+        name: $('#nombre-grupo').val().trim(),
     };
     return result;
 }
 //*****************************************************
-// Fin Leer profesor del formulario y devolver json
+// Fin Leer grupo del formulario y devolver json
 //*****************************************************
 
 //*****************************************************
 // Validar formulario y devolver cadena de validacióm
 //*****************************************************
-function validarProfesoresForm(profesor) {
+function validarGruposForm(grupo) {
     let result = '';
-    let { first_name, last_name } = profesor;
-    result += (first_name == '') ? 'Nombre' : '';
-    result += (last_name == '' && result != '') ? ' / Apellidos' : (last_name == '') ? 'Apellidos' : '';
+    let { name } = grupo;
+    result += (name == '') ? 'Nombre' : '';
     if (result != '') {
         result = 'Los siguientes campos son obligatorios: ' + result;
     }
@@ -172,16 +170,14 @@ function validarProfesoresForm(profesor) {
 //***************************************************************************
 // Mostrar listado de resultados
 //***************************************************************************
-function mostrarListadoProfesores(resultado) {
-    $('#profesores-form').trigger('reset');
+function mostrarListadoGrupos(resultado) {
+    $('#grupos-form').trigger('reset');
     let tablaResultado = $('#tabla-resultados');
     tablaResultado.html('');
-    let resultadoHTML = '<thead><tr><th scope="col">#</th><th scope="col">Nombre</th>' +
-                        '<th scope="col">Apellidos</th></tr></thead><tbody>';
-    resultado.forEach((profesor) => {
-        resultadoHTML += `<tr onclick="seleccionaResultado('#id-profesor', ${profesor.teacher_id})" class="fila-resultados">`;
-        resultadoHTML += `<th scope="row">${profesor.teacher_id}</th><td>${profesor.first_name}</td>`;
-        resultadoHTML += `<td>${profesor.last_name}</td></tr>`
+    let resultadoHTML = '<thead><tr><th scope="col">#</th><th scope="col">Nombre</th></tr></thead><tbody>';
+    resultado.forEach((grupo) => {
+        resultadoHTML += `<tr onclick="seleccionaResultado('#id-grupo', ${grupo.group_id})" class="fila-resultados">`;
+        resultadoHTML += `<th scope="row">${grupo.group_id}</th><td>${grupo.name}</td></tr>`;
     });
     resultadoHTML += '</tbody>'
     tablaResultado.append(resultadoHTML);
@@ -191,14 +187,13 @@ function mostrarListadoProfesores(resultado) {
 //***************************************************************************
 
 //***************************************************************************
-// Llenar formulario profesor
+// Llenar formulario grupo
 //***************************************************************************
-function llenarFormProfesores(resultado) {
+function llenarFormGrupos(resultado) {
     $('#tabla-resultados').html('');
-    $('#nombre-profesor').val(resultado.first_name);
-    $('#apellidos-profesor').val(resultado.last_name);
-    $('#id-profesor').val(resultado.teacher_id);
+    $('#nombre-grupo').val(resultado.name);
+    $('#id-grupo').val(resultado.group_id);
 }
 //***************************************************************************
-// Fin Llenar formulario profesor
+// Fin Llenar formulario grupo
 //***************************************************************************

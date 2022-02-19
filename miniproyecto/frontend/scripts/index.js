@@ -10,10 +10,6 @@ let ultimaSeccionActiva = "alumnos";
 //***************************************************************************
 jQuery(() => {
 
-    $('#resultados').show();
-
-
-
     // Eventos enlaces
     $('#enlace-alumnos').on('click', () => {
         if (!$('#enlace-alumnos').hasClass('active')) {
@@ -85,7 +81,82 @@ jQuery(() => {
     });
     // Reset
     $('#btn-reiniciar-profesor').on('click', () => $('#profesores-form').trigger('reset'));
-
+    
+    // Eventos botones asignatura
+    // GET
+    $('#btn-mostrar-asignatura').on('click', () => {
+        getAsignatura();
+    });
+    // POST
+    $('#btn-crear-asignatura').on('click', () => {
+        postAsignatura();
+    });
+    // PUT
+    $('#btn-actualizar-asignatura').on('click', () => {
+        putAsignatura();
+    });
+    // DELETE
+    $('#btn-eliminar-asignatura').on('click', () => {
+        deleteAsignatura();
+    });
+    // Reset
+    $('#btn-reiniciar-asignatura').on('click', () => $('#asignaturas-form').trigger('reset'));
+    
+    // Eventos botones grupo
+    // GET
+    $('#btn-mostrar-grupo').on('click', () => {
+        getGrupo();
+    });
+    // POST
+    $('#btn-crear-grupo').on('click', () => {
+        postGrupo();
+    });
+    // PUT
+    $('#btn-actualizar-grupo').on('click', () => {
+        putGrupo();
+    });
+    // DELETE
+    $('#btn-eliminar-grupo').on('click', () => {
+        deleteGrupo();
+    });
+    // Reset
+    $('#btn-reiniciar-grupo').on('click', () => $('#grupos-form').trigger('reset'));
+    
+    // Eventos botones nota
+    // GET
+    $('#btn-mostrar-nota').on('click', () => {
+        getNota();
+    });
+    // POST
+    $('#btn-crear-nota').on('click', () => {
+        postNota();
+    });
+    // PUT
+    $('#btn-actualizar-nota').on('click', () => {
+        putNota();
+    });
+    // DELETE
+    $('#btn-eliminar-nota').on('click', () => {
+        deleteNota();
+    });
+    // Reset
+    $('#btn-reiniciar-nota').on('click', () => $('#notas-form').trigger('reset'));
+    
+    // Eventos botones consultas
+    // GET media
+    $('#btn-media').on('click', () => {
+        getMedia();
+    });
+    // GET apuntadas
+    $('#btn-apuntadas').on('click', () => {
+        getApuntadas();
+    });
+    // GET impartidas
+    $('#btn-impartidas').on('click', () => {
+        getImpartidas();
+    });
+    // Reset
+    $('#btn-reiniciar-consultas').on('click', () => $('#consultas-form').trigger('reset'));
 })
 //***************************************************************************
 // Fin Carga del DOM

@@ -1,14 +1,14 @@
 //*****************************************************
-// GET profesor
+// GET asignatura
 //*****************************************************
-function getProfesor() {
-    let urlProfesores = urlBase + '/profesores';
-    let id = $('#id-profesor').val();    
+function getAsignatura() {
+    let urlAsignaturas = urlBase + '/asignaturas';
+    let id = $('#id-asignatura').val();    
     if (id.length > 0) {
-        urlProfesores += `?id=${id}`
+        urlAsignaturas += `?id=${id}`
     };
     let parametros = { headers: headers, method: 'GET' };
-    fetch(urlProfesores, parametros)
+    fetch(urlAsignaturas, parametros)
     .then((resultado) => {
         return resultado.json()
     })
@@ -16,9 +16,9 @@ function getProfesor() {
         if (respuesta.ok) {
             mostrarToast('ok', respuesta.message);
             if (respuesta.resultado.length > 0) {
-                mostrarListadoProfesores(respuesta.resultado)
+                mostrarListadoAsignaturas(respuesta.resultado)
             }else {
-                llenarFormProfesores(respuesta.resultado)
+                llenarFormAsignaturas(respuesta.resultado)
             }
         }else {
             mostrarToast('alert', respuesta.message)    
@@ -29,26 +29,26 @@ function getProfesor() {
     })
 }
 //*****************************************************
-// Fin GET profesor
+// Fin GET asignatura
 //*****************************************************
 
 //*****************************************************
-// POST profesor
+// POST asignatura
 //*****************************************************
-function postProfesor() {
-    let profesor = leerProfesoresForm();
-    let cuerpo = validarProfesoresForm(profesor);
+function postAsignatura() {
+    let asignatura = leerAsignaturasForm();
+    let cuerpo = validarAsignaturasForm(asignatura);
     if (cuerpo == '') {
-        let urlProfesores = urlBase + `/profesores`;
-        let parametros = { headers: headers, body: JSON.stringify(profesor), method: 'POST' };
-        fetch(urlProfesores, parametros)
+        let urlAsignaturas = urlBase + `/asignaturas`;
+        let parametros = { headers: headers, body: JSON.stringify(asignatura), method: 'POST' };
+        fetch(urlAsignaturas, parametros)
         .then((resultado) => {
             return resultado.json();
         })
         .then((respuesta) => {
             let tipo = (respuesta.ok) ? 'ok' : 'alert';
             mostrarToast(tipo, respuesta.message);
-            $('#profesores-form').trigger('reset');
+            $('#asignatura-form').trigger('reset');
         })        
         .catch((error) => {
             mostrarToast('error', error.message)
@@ -58,25 +58,25 @@ function postProfesor() {
     }
 }
 //*****************************************************
-// Fin POST profesor
+// Fin POST asignatura
 //*****************************************************
 
 //*****************************************************
-// PUT profesor
+// PUT asignatura
 //*****************************************************
-function putProfesor() {
-    let id = $('#id-profesor').val().trim();
+function putAsignatura() {
+    let id = $('#id-asignatura').val().trim();
     if (id.length == 0){
-        let cuerpo = 'Es necesario el id del profesor';
+        let cuerpo = 'Es necesario el id de la asignatura';
         mostrarToast('alert', cuerpo);
     }else{
-        let profesor = leerProfesoresForm();            
-        let cuerpo = validarProfesoresForm(profesor);
+        let asignatura = leerAsignaturasForm();            
+        let cuerpo = validarAsignaturasForm(asignatura);
         if (cuerpo == '') {
-            profesor.id = id;
-            let urlProfesores = urlBase + `/profesores`;
-            let parametros = { headers: headers, body: JSON.stringify(profesor), method: 'PUT' };
-            fetch(urlProfesores, parametros)
+            asignatura.id = id;
+            let urlAsignaturas = urlBase + `/asignaturas`;
+            let parametros = { headers: headers, body: JSON.stringify(asignatura), method: 'PUT' };
+            fetch(urlAsignaturas, parametros)
             .then((resultado) => {
                 return resultado.json();
             })
@@ -84,7 +84,7 @@ function putProfesor() {
                 let tipo = 'alert';
                 if (respuesta.ok) { 
                     tipo = 'ok';
-                    $('#profesores-form').trigger('reset');
+                    $('#asignatura-form').trigger('reset');
                     $('#tabla-resultados').html('');
                 };
                 mostrarToast(tipo, respuesta.message);
@@ -98,25 +98,25 @@ function putProfesor() {
     }    
 }
 //*****************************************************
-// Fin PUT profesor
+// Fin PUT asignatura
 //*****************************************************
 
 //*****************************************************
-// DELETE profesor
+// DELETE asignatura
 //*****************************************************
-function deleteProfesor() {
-    let id = $('#id-profesor').val().trim();
+function deleteAsignatura() {
+    let id = $('#id-asignatura').val().trim();
     if (id.length == 0) {
-        let cuerpo = 'Es necesario el id del profesor';
+        let cuerpo = 'Es necesario el id de la asignatura';
         mostrarToast('alert', cuerpo);
     }else {
-        let urlProfesores = urlBase + `/profesores`;
+        let urlAsignaturas = urlBase + `/asignaturas`;
         let parametros = {
             headers: headers,
             body: JSON.stringify({ id: id }),
             method: "DELETE"
         };
-        fetch(urlProfesores, parametros)
+        fetch(urlAsignaturas, parametros)
         .then((resultado) => {
             return resultado.json()
         })
@@ -124,7 +124,7 @@ function deleteProfesor() {
             let tipo = 'alert';
             if (respuesta.ok) { 
                 tipo = 'ok';
-                $('#profesores-form').trigger('reset');
+                $('#asignatura-form').trigger('reset');
                 $('#tabla-resultados').html('');
             };            
             mostrarToast(tipo, respuesta.message);
@@ -135,31 +135,29 @@ function deleteProfesor() {
     }
 }
 //*****************************************************
-// Fin DELETE profesor
+// Fin DELETE asignatura
 //*****************************************************
 
 //*****************************************************
-// Leer profesor del formulario y devolver json
+// Leer asignatura del formulario y devolver json
 //*****************************************************
-function leerProfesoresForm() {
+function leerAsignaturasForm() {
     let result = {
-        first_name: $('#nombre-profesor').val().trim(),
-        last_name: $('#apellidos-profesor').val().trim(),
+        title: $('#nombre-asignatura').val().trim(),
     };
     return result;
 }
 //*****************************************************
-// Fin Leer profesor del formulario y devolver json
+// Fin Leer asignatura del formulario y devolver json
 //*****************************************************
 
 //*****************************************************
 // Validar formulario y devolver cadena de validacióm
 //*****************************************************
-function validarProfesoresForm(profesor) {
+function validarAsignaturasForm(asignatura) {
     let result = '';
-    let { first_name, last_name } = profesor;
-    result += (first_name == '') ? 'Nombre' : '';
-    result += (last_name == '' && result != '') ? ' / Apellidos' : (last_name == '') ? 'Apellidos' : '';
+    let { title } = asignatura;
+    result += (title == '') ? 'Asignatura' : '';
     if (result != '') {
         result = 'Los siguientes campos son obligatorios: ' + result;
     }
@@ -172,16 +170,14 @@ function validarProfesoresForm(profesor) {
 //***************************************************************************
 // Mostrar listado de resultados
 //***************************************************************************
-function mostrarListadoProfesores(resultado) {
-    $('#profesores-form').trigger('reset');
+function mostrarListadoAsignaturas(resultado) {
+    $('#asignaturas-form').trigger('reset');
     let tablaResultado = $('#tabla-resultados');
     tablaResultado.html('');
-    let resultadoHTML = '<thead><tr><th scope="col">#</th><th scope="col">Nombre</th>' +
-                        '<th scope="col">Apellidos</th></tr></thead><tbody>';
-    resultado.forEach((profesor) => {
-        resultadoHTML += `<tr onclick="seleccionaResultado('#id-profesor', ${profesor.teacher_id})" class="fila-resultados">`;
-        resultadoHTML += `<th scope="row">${profesor.teacher_id}</th><td>${profesor.first_name}</td>`;
-        resultadoHTML += `<td>${profesor.last_name}</td></tr>`
+    let resultadoHTML = '<thead><tr><th scope="col">#</th><th scope="col">Asignatura</th></tr></thead><tbody>';
+    resultado.forEach((asignatura) => {
+        resultadoHTML += `<tr onclick="seleccionaResultado('#id-asignatura', ${asignatura.subject_id})" class="fila-resultados">`;
+        resultadoHTML += `<th scope="row">${asignatura.subject_id}</th><td>${asignatura.title}</td></tr>`;
     });
     resultadoHTML += '</tbody>'
     tablaResultado.append(resultadoHTML);
@@ -191,14 +187,13 @@ function mostrarListadoProfesores(resultado) {
 //***************************************************************************
 
 //***************************************************************************
-// Llenar formulario profesor
+// Llenar formulario asignatura
 //***************************************************************************
-function llenarFormProfesores(resultado) {
+function llenarFormAsignaturas(resultado) {
     $('#tabla-resultados').html('');
-    $('#nombre-profesor').val(resultado.first_name);
-    $('#apellidos-profesor').val(resultado.last_name);
-    $('#id-profesor').val(resultado.teacher_id);
+    $('#nombre-asignatura').val(resultado.title);
+    $('#id-asignatura').val(resultado.subject_id);
 }
 //***************************************************************************
-// Fin Llenar formulario profesor
+// Fin Llenar formulario asignatura
 //***************************************************************************

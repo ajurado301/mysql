@@ -11,6 +11,9 @@ app.use('/notas', require('./routes/notas'));
 app.use('/profesores', require('./routes/profesores'));
 app.use('/grupos', require('./routes/grupos'));
 app.use('/asignaturas', require('./routes/asignaturas'));
+app.use('/media', require('./routes/media'));
+app.use('/apuntadas', require('./routes/apuntadas'));
+app.use('/impartidas', require('./routes/impartidas'));
 // ************************************************************************
 
 // Respuesta a cualquier petición en '/'

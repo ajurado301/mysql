@@ -5,7 +5,7 @@ const router = Router();
 // Importar controladores
 const { getAsignatura, postAsignatura, putAsignatura, deleteAsignatura } = require('../controllers/asignaturas')
 
-// Crear los endpoints para la ruta /alumnos y atenderlos mediante sus controladores
+// Crear los endpoints para la ruta /asignaturas y atenderlos mediante sus controladores
 router.get('/', getAsignatura);
 router.post('/', postAsignatura);
 router.put('/', putAsignatura);

@@ -5,7 +5,7 @@ const router = Router();
 // Importar controladores
 const { getGrupo, postGrupo, putGrupo, deleteGrupo } = require('../controllers/grupos')
 
-// Crear los endpoints para la ruta /alumnos y atenderlos mediante sus controladores
+// Crear los endpoints para la ruta /grupos y atenderlos mediante sus controladores
 router.get('/', getGrupo);
 router.post('/', postGrupo);
 router.put('/', putGrupo);

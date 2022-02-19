@@ -131,7 +131,7 @@ function putAlumno() {
 function deleteAlumno() {
     let id = $('#id-alumno').val().trim();
     if (id.length == 0) {
-        let cuerpo = 'Se necesita el id del alumno';
+        let cuerpo = 'Es necesario el id del alumno';
         mostrarToast('alert', cuerpo);
     }else {
         let urlAlumnos = urlBase + `/alumnos`;
