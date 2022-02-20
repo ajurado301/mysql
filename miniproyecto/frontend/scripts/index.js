@@ -60,7 +60,10 @@ jQuery(() => {
         deleteAlumno();
     });
     // Reset
-    $('#btn-reiniciar-alumno').on('click', () => $('#alumnos-form').trigger('reset'));
+    $('#btn-reiniciar-alumno').on('click', () => {
+        $('#alumnos-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
     
     // Eventos botones profesor
     // GET
@@ -80,7 +83,10 @@ jQuery(() => {
         deleteProfesor();
     });
     // Reset
-    $('#btn-reiniciar-profesor').on('click', () => $('#profesores-form').trigger('reset'));
+    $('#btn-reiniciar-profesor').on('click', () => {
+        $('#profesores-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
     
     // Eventos botones asignatura
     // GET
@@ -100,7 +106,10 @@ jQuery(() => {
         deleteAsignatura();
     });
     // Reset
-    $('#btn-reiniciar-asignatura').on('click', () => $('#asignaturas-form').trigger('reset'));
+    $('#btn-reiniciar-asignatura').on('click', () => {
+        $('#asignaturas-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
     
     // Eventos botones grupo
     // GET
@@ -120,7 +129,10 @@ jQuery(() => {
         deleteGrupo();
     });
     // Reset
-    $('#btn-reiniciar-grupo').on('click', () => $('#grupos-form').trigger('reset'));
+    $('#btn-reiniciar-grupo').on('click', () => {
+        $('#grupos-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
     
     // Eventos botones nota
     // GET
@@ -140,7 +152,10 @@ jQuery(() => {
         deleteNota();
     });
     // Reset
-    $('#btn-reiniciar-nota').on('click', () => $('#notas-form').trigger('reset'));
+    $('#btn-reiniciar-nota').on('click', () => {
+        $('#notas-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
     
     // Eventos botones consultas
     // GET media
@@ -156,7 +171,10 @@ jQuery(() => {
         getImpartidas();
     });
     // Reset
-    $('#btn-reiniciar-consultas').on('click', () => $('#consultas-form').trigger('reset'));
+    $('#btn-reiniciar-consultas').on('click', () => {
+        $('#consultas-form').trigger('reset');
+        $('#tabla-resultados').html('');
+    });
 })
 //***************************************************************************
 // Fin Carga del DOM

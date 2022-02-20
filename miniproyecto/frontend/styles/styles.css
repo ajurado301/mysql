@@ -21,13 +21,13 @@ th, tr {
 
 /* Bootstrap modificados */
 .bg-success {
-    background-color: rgba(40, 225, 40, 0.5)!important;
+    background-color: rgb(40, 225, 40)!important;
 }
 
 .bg-warning {
-    background-color: rgba(245, 240, 75, 0.5)!important;
+    background-color: rgb(245, 239, 75)!important;
 }
 
 .bg-danger {
-    background-color: rgba(245, 80, 80, 0.5)!important;
+    background-color: rgb(245, 80, 80)!important;
 }
