@@ -1,9 +1,9 @@
  /* Limpiadores */
- *{
+ /* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 /* Elemento HTML */
 p {
@@ -30,4 +30,11 @@ th, tr {
 
 .bg-danger {
     background-color: rgb(245, 80, 80)!important;
+}
+
+/* En contexto lg quitamos el padding top/bottom de los links para que la barra de navegación no tenga tanta altura */
+@media screen and (min-width: 992px) { 
+    .nav-link {
+        padding: 0rem 1rem;
+    }    
 }
