@@ -1,5 +1,6 @@
 // Variables de entorno
 require('dotenv').config();
+console.log(process.env.PORT)
 // Puesta en marcha de app de express 
 const app = require('./app');
 // Base de datos

@@ -1,3 +1,5 @@
+// Puerto
+const puerto = 3000;
 // Importaciones
 const express = require('express');
 const cors = require('cors');
@@ -11,8 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Poner express API REST a la escucha
-app.listen(process.env.PORT, () => {
-    console.log(`Servidor express corriendo en el puerto ${process.env.PORT}`);
+app.listen(puerto, () => {
+    console.log(`Servidor express corriendo en el puerto ${puerto}`);
 });
 
 // Exportar app express

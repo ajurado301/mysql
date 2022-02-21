@@ -1,11 +1,17 @@
+// Datos cadena conexión MySQL
+const host = 'localhost';
+const user = 'root';
+const pass = 'Codenotch#2022';
+const bbdd = 'codenotch';
+
 // Importaciones
 const mysql = require('mysql2');
 
 const cadenaConexion = {
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASS,
-    database: process.env.MYSQL_BBDD
+    host: host,
+    user: user,
+    password: pass,
+    database: bbdd
 }
 // Crear Conexión y conectar con BBDD codenotch mysql
 const codenotchBBDD = mysql.createConnection(cadenaConexion);
